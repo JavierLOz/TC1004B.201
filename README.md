@@ -9,5 +9,8 @@ Dentro del repositorio se encuentran los siguientes archivos:
 
     Este jupyter Notebook contiene las lineas de código para crear la base de datos.
     
-- que son para ideas
+- retoIOTProgram
+
+    Archivo con el progrma de Arduino para conectarse a la red y a la api, tomar los registros y subirlos
+
 - se esctibe con - y un espacio
