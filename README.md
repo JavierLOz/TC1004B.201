@@ -13,4 +13,10 @@ Dentro del repositorio se encuentran los siguientes archivos:
 
     Archivo con el progrma de Arduino para conectarse a la red y a la api, tomar los registros y subirlos
 
-- se esctibe con - y un espacio
+- app.py
+
+   Contiene el código de la api
+   
+- requerimientos.txt
+   
+   El conjunto de librerías necesarias para la app
