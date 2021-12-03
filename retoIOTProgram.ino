@@ -1,19 +1,21 @@
 #include <WiFiNINA.h>
 #include <ArduinoJson.h>
 
-
+// Datos de la red a conectar
 char ssid[] = "iPhone de Salva";
 char password[] = "23568910";
 
 int status = WL_IDLE_STATUS;
 
+//Dirección de la api
 char server[] = "c84e-148-241-109-145.ngrok.io";    //Always modify when re-run ngrok
 
 WiFiClient client;
 
 void setup(){
   Serial.begin(9600);
-
+  
+  //Conectarse a la red
   while (status != WL_CONNECTED) {
     Serial.println("Attempting to connect to Network: ");
     Serial.println(ssid);
@@ -31,23 +33,25 @@ void setup(){
 }
 
 void loop(){
-
+  
+  //Crear los json 
   DynamicJsonDocument doc1(1024);
   DynamicJsonDocument doc2(1024);
   DynamicJsonDocument doc3(1024);
   DynamicJsonDocument doc4(1024);
   
+  //Datos para la lectura de gases
   float sensor1 = analogRead(A0);
   float voltaje = sensor1 * (5.0 /1023.0);
   float rs = 1000*( (5-voltaje) / voltaje);
   double co =-0.913*log(rs) + 9.6282;
   
-  
+  //Valores para la base de datos
   int cuarto1 = 15;
   int parametro1 = 5;
   int alumno1 = 55;
   
-  
+  //Toma del gas y escritura en el json
   Serial.print("  co: ");
   Serial.print(co);
   doc1["value"] = co;
@@ -92,7 +96,8 @@ void loop(){
   serializeJson(doc2, postData2);
   serializeJson(doc3, postData3);
   serializeJson(doc4, postData4);
-
+  
+   //Mandar json a la api
    if (client.connect(server, 80)) {
     client.println("POST /agregarMedicion HTTP/1.1");
     client.println("Host: c84e-148-241-109-145.ngrok.io");
